@@ -287,6 +287,13 @@ class TwitterAPIExchange
         {
             $curlOptions[CURLOPT_CUSTOMREQUEST] = $this->requestMethod;
         }
+        
+        if (isset($curlOptions[CURLOPT_HTTPHEADER])) {
+            foreach ($curlOptions[CURLOPT_HTTPHEADER] as $additionnalHeader) {
+                $header[] = $additionnalHeader;
+            }
+            unset($curlOptions[CURLOPT_HTTPHEADER]);
+        }
 
         $options = $curlOptions + array(
             CURLOPT_HTTPHEADER => $header,
